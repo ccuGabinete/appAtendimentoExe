@@ -3,12 +3,15 @@ import '../polyfills';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 
 // NG Translate
@@ -19,6 +22,9 @@ import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
 import { Usuario } from './models/usuario';
+import { DadosComponent } from './dados/dados.component';
+import { Cadastro } from './models/cadastro';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DadosComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -37,6 +43,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    NgbModule,
+    MatToolbarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -45,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [Usuario],
+  providers: [Usuario, Cadastro],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

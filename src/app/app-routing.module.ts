@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components';
+import { DadosComponent } from './dados/dados.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: '**',
     component: PageNotFoundComponent
+  },
+  {
+    path:'dados',
+    component: DadosComponent
   }
 ];
 

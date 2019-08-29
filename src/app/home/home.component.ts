@@ -12,14 +12,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private router: Router, public usuario: Usuario){
 
   }
- 
+
+  
      
   ngOnInit(): void {
    this.usuario = new Usuario();
   }  
   
   onSubmit() {
-    // aqui você pode implementar a logica para fazer seu formulário salvar
+    this.router.navigateByUrl('dados')
     console.log(this.usuario);
   }
 

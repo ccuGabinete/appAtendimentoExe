@@ -10,15 +10,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import { Usuario } from '../models/usuario';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+
+import {OverlayContainer} from '@angular/cdk/overlay';
+
+
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [  CommonModule,
-              SharedModule, 
-              HomeRoutingModule, 
-              BrowserAnimationsModule, 
+              SharedModule,
+              HomeRoutingModule,
+              BrowserAnimationsModule,
               MatInputModule,
               FormsModule,
               MatButtonModule
@@ -27,4 +31,8 @@ import {MatButtonModule} from '@angular/material/button';
 })
 
 
-export class HomeModule {}
+export class HomeModule {
+  constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
+  }
+}

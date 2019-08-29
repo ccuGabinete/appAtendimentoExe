@@ -1,7 +1,5 @@
-const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin;
+import { LicenseWebpackPlugin } from 'license-webpack-plugin';
  
-module.exports = {
-  plugins: [
-    new LicenseWebpackPlugin()
-  ]
-};
+export const plugins = [
+  new LicenseWebpackPlugin()
+];

@@ -1,15 +1,17 @@
 <div class="example-container">
 
-  <mat-form-field>
-      <input matInput type="number" min="7" max="7" placeholder="Usuário" name="usuario" id="usuario" [(ngModel)]="usuario.login">
-  </mat-form-field>
-          
-  <mat-form-field>
-      <input matInput type="password" maxlength="11" placeholder="Senha" name="senha" id="senha" [(ngModel)]="usuario.senha">
-  </mat-form-field>
+  <div class="unicorn-dark-theme">
+    <mat-form-field color="primary">
+        <input matInput type="number" min="7" max="7" placeholder="Usuário" name="usuario" id="usuario" [(ngModel)]="usuario.login">
+    </mat-form-field>
 
-  <div class="enviar">
-      <button type="submit" mat-fab color="primary" (click)="onSubmit()">login</button>
+    <mat-form-field>
+        <input matInput type="password" maxlength="11" placeholder="Senha" name="senha" id="senha" [(ngModel)]="usuario.senha">
+    </mat-form-field>
+  </div>
+
+  <div class="enviar unicorn-dark-theme">
+    <button type="submit" mat-fab color="primary" (click)="onSubmit()">login</button>
   </div>
 
 </div>

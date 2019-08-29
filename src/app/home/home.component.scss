@@ -1,101 +1,16 @@
-@media (max-width: 575.98px) { 
-    
-    
-  .example-container {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      height: 45%;
-      width: 80%;
-      top: 25%;
-      margin-bottom: 25%;
-      margin-left: 10%;
-      align-items: center;
-      background-color: pink;
-      justify-content: center;
-      padding: 5%;
-   }
-
-  }
-
-
-@media (min-width: 576px) and (max-width: 767.98px) { 
-  .example-container {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      height: 40%;
-      width: 50%;
-      margin-top: 25%;
-      margin-bottom: 25%;
-      margin-left: 25%;
-      align-items: center;
-      background-color: pink;
-      justify-content: center;
-      padding: 5%;
-   }
-
-}
-
-
-@media (min-width: 768px) and (max-width: 991.98px) { 
-  .example-container {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      height: 50%;
-      width: 40%;
-      margin-top: 15%;
-      margin-bottom: 25%;
-      margin-left: 30%;
-      align-items: center;
-      background-color: pink;
-      justify-content: center;
-      padding: 5%;
-   }   
-
-}
-
-
-@media (min-width: 992px) and (max-width: 1199.98px) { 
-  .example-container {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      height: 50%;
-      width: 30%;
-      margin-top: 15%;
-      margin-bottom: 25%;
-      margin-left: 30%;
-      align-items: center;
-      background-color: pink;
-      justify-content: center;
-      padding: 5%;
-   }
-
-}
-
-
-@media (min-width: 1200px) { 
-  .example-container {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      height: 50%;
-      width: 25%;
-      top: 20%;
-      margin-bottom: 25%;
-      margin-left: 32.5%;
-      align-items: center;
-      background-color: pink;
-      justify-content: center;
-      padding: 5%;
-   }
-
-   mat-form-field{
-      width: 100%;  
-   }
-
+.example-container {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   height: 50%;
+   width: 25%;
+   top: 20%;
+   margin-bottom: 25%;
+   margin-left: 32.5%;
+   align-items: center;
+   background-color:#101010;
+   justify-content: center;
+   padding: 5%;
 }
 
 .enviar{
