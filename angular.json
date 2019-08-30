@@ -140,7 +140,7 @@
       }
     }
   },
-  "defaultProject": "angular-electron",
+  "defaultProject": "ccu-atendiemnto",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

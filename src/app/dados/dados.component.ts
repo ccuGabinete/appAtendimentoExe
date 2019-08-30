@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Setores } from '../models/setores';
-import { Documentos } from '../models/documentos';
-import { Cadastro } from '../models/cadastro';
+import { Setores } from '../models/setores/setores';
+import { Documentos } from '../models/documentos/documentos';
+import { Cadastro } from '../models/cadastro/cadastro';
 
 @Component({
   selector: 'app-dados',
@@ -14,7 +14,7 @@ export class DadosComponent implements OnInit {
 
   setores = new Setores().getTipos();
   documentos = new Documentos().getDocs();
-  
+
 
   ngOnInit() {
   this.cadastro = new Cadastro();

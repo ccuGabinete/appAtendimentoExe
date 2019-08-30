@@ -2,19 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components';
 import { DadosComponent } from './dados/dados.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    component: HomeComponent
   },
   {
-    path: '**',
-    component: PageNotFoundComponent
-  },
-  {
-    path:'dados',
+    path: 'dados',
     component: DadosComponent
   }
 ];
