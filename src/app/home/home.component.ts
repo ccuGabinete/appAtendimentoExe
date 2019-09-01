@@ -5,6 +5,8 @@ import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario/usuario';
 import { MatSnackBar, MatSnackBarConfig  } from '@angular/material';
+import { SucessoService } from '../services/sucesso/SucessoService';
+import { LogadoService } from '../services/logado/logado.service';
 
 
 @Component({
@@ -24,9 +26,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       private router: Router,
       public usuario: Usuario,
       public login: LoginService,
-      private _snackBar: MatSnackBar) {}
-
-
+      private _snackBar: MatSnackBar,
+      private aviso: SucessoService,
+      private logado: LogadoService
+      ) {}
 
       openSnackBar() {
         const config = new MatSnackBarConfig();
@@ -35,27 +38,24 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._snackBar.openFromComponent(AlertaComponent, config);
       }
 
-
-
   ngOnInit(): void {
-
   }
 
   onSubmit() {
     this.observer = this.login.getUser(this.usuario).subscribe(
       res => {
         if  ( res ) {
+          this.logado.mudarUsuario(this.usuario.login);
           this.router.navigateByUrl('dados');
-          console.log(this.usuario);
         } else  {
           this.openSnackBar();
         }
       }
-  );
-
+    );
   }
 
   ngOnDestroy(): void {
+    this.aviso.mudarAviso(false);
   }
 
 }

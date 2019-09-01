@@ -7,11 +7,13 @@
   </mat-toolbar>
 </div>
 
+<p class="logado">Matrícula: {{cadastro.matricula}}</p>
+
 
 <div class="alinhamentoItens">
   <div class="unicorn-dark-theme">
       <mat-form-field>
-          <input matInput type="text" placeholder="Nome" name="nome" id="nome" [(ngModel)]="cadastro.nome">
+          <input matInput type="text" placeholder="Nome" name="nome" id="nome" [(ngModel)]="cadastro.atendido">
       </mat-form-field>
   </div>
 
@@ -44,7 +46,7 @@
   </div>
 
   <div class="alinhamentoButton unicorn-dark-theme">
-      <button type="submit" class="enviarCadastro" mat-fab color="accent" (click)="onSubmit(cadastro)">salvar</button>
+      <button type="submit" class="enviarCadastro" mat-fab color="accent" (click)="onSubmit()">salvar</button>
   </div>
 </div>
 

@@ -1,6 +1,7 @@
 export class Cadastro {
-    nome: string
+    atendido: string
     destino: string
     documento: string
-    numero: string   
+    numero: string
+    matricula: string   
 }

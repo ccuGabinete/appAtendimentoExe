@@ -30,6 +30,15 @@ import { AppComponent } from './app.component';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AlertaComponent } from './alerta/alerta.component';
+import { SucessoService } from './services/sucesso/SucessoService';
+import { Aviso } from './models/aviso/aviso';
+import { AvisocamposService } from './services/avisocampos/avisocampos.service';
+import { AvisosalvarService } from './services/avisosalvar/avisosalvar.service';
+import { Avisocamposmodel } from './models/avisoscamposmodel/avisocamposmodel';
+import { Avisosalvarmodel } from './models/avisosalvarmodel/avisosalvarmodel';
+import { AvisosalvarComponent } from './avisosalvar/avisosalvar.component';
+import { AvisocamposComponent } from './avisocampos/avisocampos.component';
+import { LogadoService } from './services/logado/logado.service';
 
 
 // AoT requires an exported function for factories
@@ -38,7 +47,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, DadosComponent, HomeComponent, AlertaComponent],
+  declarations: [
+    AppComponent, 
+    DadosComponent, 
+    HomeComponent, 
+    AlertaComponent, 
+    AvisosalvarComponent, 
+    AvisocamposComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -61,10 +77,29 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [Usuario, Cadastro, LoginService],
+  providers: [
+        Usuario, 
+        Cadastro, 
+        Aviso, 
+        LoginService, 
+        SucessoService,
+        AvisocamposService,
+        AvisosalvarService,
+        Avisosalvarmodel,
+        Avisocamposmodel,
+        LogadoService
+      ],
   bootstrap: [AppComponent],
-  exports: [AlertaComponent],
-  entryComponents: [AlertaComponent]
+  exports: [
+        AlertaComponent, 
+        AvisocamposComponent,
+        AvisosalvarComponent
+      ],
+  entryComponents: [
+    AlertaComponent,
+    AvisocamposComponent,
+    AvisosalvarComponent
+  ]
 
 })
 export class AppModule {}
