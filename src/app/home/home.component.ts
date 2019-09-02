@@ -42,16 +42,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.observer = this.login.getUser(this.usuario).subscribe(
-      res => {
-        if  ( res ) {
-          this.logado.mudarUsuario(this.usuario.login);
-          this.router.navigateByUrl('dados');
-        } else  {
-          this.openSnackBar();
+    if(!this.usuario.login || !this.usuario.senha){
+      this.openSnackBar();
+    }else{
+      this.observer = this.login.getUser(this.usuario).subscribe(
+        res => {
+          if  ( res ) {
+            this.logado.mudarUsuario(this.usuario.login);
+            this.router.navigateByUrl('dados');
+          } else  {
+            this.openSnackBar();
+          }
         }
-      }
-    );
+      );
+    }
+    
+    
   }
 
   ngOnDestroy(): void {

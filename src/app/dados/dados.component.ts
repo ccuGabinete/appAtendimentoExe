@@ -9,6 +9,7 @@ import { AvisocamposComponent } from '../avisocampos/avisocampos.component';
 import { SalvarcadastroService } from '../services/salvarcadastro/salvarcadastro.service';
 import { LogadoService } from '../services/logado/logado.service';
 import { AvisocamposService } from '../services/avisocampos/avisocampos.service';
+import * as moment from 'moment-timezone';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { AvisocamposService } from '../services/avisocampos/avisocampos.service'
 })
 
 export class DadosComponent implements OnInit, OnDestroy {
+  nome: string;
 
   constructor(
     public cadastro: Cadastro,
@@ -34,15 +36,17 @@ export class DadosComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cadastro = new Cadastro();
     this.cadastro.matricula = '';
+    this.cadastro.data = this.gerarData();
     this.logado.currentMessage.subscribe(user => {
       this.cadastro.matricula = user;
     })
+    
   
   }
 
-  onSubmit(value){
+  onSubmit(){
    if(
-        !this.cadastro.atendido 
+        !this.nome 
     ||  !this.cadastro.destino 
     ||  !this.cadastro.documento
     ||  !this.cadastro.numero
@@ -50,6 +54,7 @@ export class DadosComponent implements OnInit, OnDestroy {
       this.serviceCampos.mudarAviso(false);
       this.openSnackBarCampos();
    }else{
+      this.cadastro.atendido = this.nome.toUpperCase();
       this.salvarservice.salvarCadastro(this.cadastro).subscribe(data => {        
         if (data.atendido){
           this.serviceSalvar.mudarAviso(true);
@@ -79,14 +84,20 @@ export class DadosComponent implements OnInit, OnDestroy {
   }
 
   reset() {
-    this.cadastro.atendido = null;
+    this.nome = null;
     this.cadastro.destino = "Setor";
     this.cadastro.documento = "Documento";
     this.cadastro.numero = null;
   }
 
-  ngOnDestroy(): void {
+  gerarData(){
+    let data = Date.now();
+    let dateMoment = moment(data);
+    return dateMoment.tz('America/Sao_Paulo').format('DD/MM/YYYY hh:mm:ss A');
+  }
 
+  ngOnDestroy(): void {
+    
   }
 
 }

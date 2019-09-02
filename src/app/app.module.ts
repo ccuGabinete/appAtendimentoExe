@@ -40,7 +40,6 @@ import { AvisosalvarComponent } from './avisosalvar/avisosalvar.component';
 import { AvisocamposComponent } from './avisocampos/avisocampos.component';
 import { LogadoService } from './services/logado/logado.service';
 
-
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

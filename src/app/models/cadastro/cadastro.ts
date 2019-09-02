@@ -3,5 +3,6 @@ export class Cadastro {
     destino: string
     documento: string
     numero: string
-    matricula: string   
+    matricula: string
+    data: Date   
 }

@@ -8,7 +8,7 @@ import { Avisocamposmodel } from '../../models/avisoscamposmodel/avisocamposmode
 export class AvisocamposService {
 
   public message = new Avisocamposmodel();
-  public messageSource = new BehaviorSubject(this.message);
+  public messageSource = new BehaviorSubject(this.message.aviso);
   currentMessage = this.messageSource.asObservable();
 
   constructor() { 
@@ -16,6 +16,6 @@ export class AvisocamposService {
   }
 
   mudarAviso(aviso: boolean){
-      this.messageSource.next(this.message);
+      this.messageSource.next(aviso);
   }
 }
