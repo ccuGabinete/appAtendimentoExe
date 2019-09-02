@@ -9,7 +9,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
-const apiUrl = 'http://localhost:3000/';
+const apiUrl = 'https://ccuapi.herokuapp.com/';
 
 @Injectable({
   providedIn: 'root'
