@@ -10,6 +10,8 @@ const httpOptions = {
 };
 
 const apiUrl = 'https://ccuapi.herokuapp.com/';
+const local = 'https://ccuapi.herokuapp.com/buscarDoc';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,14 @@ export class SalvarcadastroService {
     return this.http.post<any>(apiUrl, cadastro, httpOptions)
     .pipe(
       tap(itens => console.log('saved data')),
+      catchError(this.handleError('', []))
+    );
+  }
+
+  buscarCadastro (numero: string): Observable<Cadastro> {
+    return this.http.post<any>(local, {numero: numero}, httpOptions)
+    .pipe(
+      tap(itens => console.log('loaded data')),
       catchError(this.handleError('', []))
     );
   }

@@ -4,11 +4,24 @@
     <mat-toolbar-row>
       <span>ATENDIMENTO</span>
     </mat-toolbar-row>
-  </mat-toolbar>
+    </mat-toolbar>
 </div>
 
-<p class="logado">Matrícula: {{cadastro.matricula}}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="" style="color: teal; font-size: 1em;">{{usuario}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input matTooltip="Número do documento fornecido" [(ngModel)]="documento.numero" [ngModelOptions]="{standalone: true}" class="form-control mr-sm-2" type="search" placeholder="documento" aria-label="Search" >
+      <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="openSource()"  >Buscar</button>
+    </form>
+  </div>
+</nav>
 
 <div class="alinhamentoItens">
   <div class="unicorn-dark-theme">
@@ -41,13 +54,19 @@
 
   <div class="unicorn-dark-theme">
       <mat-form-field >
-          <input matInput  type="text" placeholder="Número" name="numero" id="numero" [(ngModel)]="cadastro.numero">
+          <input matInput  
+            type="text" 
+            placeholder="Número" 
+            name="numero" 
+            id="numero" 
+            [(ngModel)]="cadastro.numero" 
+            (change)="changeEvent($event)">
       </mat-form-field>
   </div>
 
   <div class="alinhamentoButton unicorn-dark-theme">
-      <button type="submit" class="enviarCadastro" mat-fab color="accent" (click)="onSubmit()">salvar</button>
-  </div>
+      <button mat-button color="primary" (click)="onSubmit()" #submitButton>Salvar</button>
+    </div>
 </div>
 
 

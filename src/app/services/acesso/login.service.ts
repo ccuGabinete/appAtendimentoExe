@@ -11,6 +11,7 @@ const httpOptions = {
 const apiUrl = 'https://ccuapi.herokuapp.com/acesso/validar';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  getUser (usuario: Usuario): Observable<boolean> {
+  getUser (usuario: Usuario): Observable<Usuario> {
     return this.http.post<any>(apiUrl, usuario, httpOptions)
     .pipe(
       tap(itens => console.log('loaded data')),

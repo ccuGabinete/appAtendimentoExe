@@ -1,19 +1,22 @@
+import { Cadastro } from './../../models/cadastro/cadastro';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../../models/usuario/usuario';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LogadoService {
+export class CadastroService {
 
-  public message = new Usuario();
+  public message = new Cadastro();
+
   public messageSource = new BehaviorSubject(this.message);
   currentMessage = this.messageSource.asObservable();
 
-  constructor() {}
-
-  mudarUsuario(usuario: Usuario){
-      this.messageSource.next(usuario);
+  constructor() {
   }
+
+  getCadastro(cadastro: Cadastro) {
+    this.messageSource.next(cadastro);
+  }
+
 }

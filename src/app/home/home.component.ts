@@ -1,7 +1,7 @@
 import { AlertaComponent } from './../alerta/alerta.component';
 import { Observable, Subscription } from 'rxjs';
 import { LoginService } from './../services/acesso/login.service';
-import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario/usuario';
 import { MatSnackBar, MatSnackBarConfig  } from '@angular/material';
@@ -16,7 +16,7 @@ import { LogadoService } from '../services/logado/logado.service';
   providers: [LoginService, Usuario]
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   observer: Subscription;
   durationInSeconds = 225;
@@ -37,18 +37,30 @@ export class HomeComponent implements OnInit, OnDestroy {
         config.verticalPosition = 'top';
         this._snackBar.openFromComponent(AlertaComponent, config);
       }
-
+  
+  @ViewChild('submitButton') submitButton;
   ngOnInit(): void {
   }
 
+  changeEvent($event){
+    this.submitButton.focus();
+  }  
+
   onSubmit() {
-    if(!this.usuario.login || !this.usuario.senha){
+    if (!this.usuario.login || !this.usuario.senha){
       this.openSnackBar();
-    }else{
+    } else {
       this.observer = this.login.getUser(this.usuario).subscribe(
         res => {
-          if  ( res ) {
-            this.logado.mudarUsuario(this.usuario.login);
+          if  ( res.isValid ) {
+            console.log(res);
+            const user = new Usuario();
+              user.isValid = res.isValid;
+              user.link = res.link;
+              user.login = res.login;
+              user.nome = res.nome;
+              user.senha = res.senha;
+            this.logado.mudarUsuario(user);
             this.router.navigateByUrl('dados');
           } else  {
             this.openSnackBar();
@@ -56,12 +68,5 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       );
     }
-    
-    
-  }
-
-  ngOnDestroy(): void {
-    this.aviso.mudarAviso(false);
-  }
-
+  };
 }

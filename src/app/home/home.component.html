@@ -3,16 +3,16 @@
 
   <div class="unicorn-dark-theme">
     <mat-form-field color="primary">
-        <input matInput type="text" maxlength="7" placeholder="Usuário" name="usuario" id="usuario" [(ngModel)]="usuario.login">
+        <input matTooltip="Exemplo: 2436723" matInput type="text" maxlength="7" placeholder="Usuário" name="usuario" id="usuario" [(ngModel)]="usuario.login">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput type="password" maxlength="11" placeholder="Senha" name="senha" id="senha" [(ngModel)]="usuario.senha">
+        <input matTooltip="CPF sem pontos ou traço" matInput type="password" maxlength="11" placeholder="Senha" name="senha" id="senha" [(ngModel)]="usuario.senha" (change)="changeEvent($event)">
     </mat-form-field>
   </div>
 
   <div class="enviar unicorn-dark-theme">
-    <button type="submit" mat-fab color="primary" (click)="onSubmit()">login</button>
+    <button mat-button color="primary" (click)="onSubmit()" #submitButton>Entrar</button>
   </div>
 
 </div>

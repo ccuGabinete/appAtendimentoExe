@@ -1,8 +1,9 @@
 export class Cadastro {
-    atendido: string
-    destino: string
-    documento: string
-    numero: string
-    matricula: string
-    data: Date   
+    atendido: string;
+    destino: string;
+    documento: string;
+    numero: string;
+    matricula: string;
+    data: Date;
+  lenght: any;
 }

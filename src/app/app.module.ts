@@ -28,7 +28,7 @@ import { HomeComponent } from './home/home.component';
 
 import { AppComponent } from './app.component';
 
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AlertaComponent } from './alerta/alerta.component';
 import { SucessoService } from './services/sucesso/SucessoService';
 import { Aviso } from './models/aviso/aviso';
@@ -39,6 +39,11 @@ import { Avisosalvarmodel } from './models/avisosalvarmodel/avisosalvarmodel';
 import { AvisosalvarComponent } from './avisosalvar/avisosalvar.component';
 import { AvisocamposComponent } from './avisocampos/avisocampos.component';
 import { LogadoService } from './services/logado/logado.service';
+import { FormularioComponent } from './formulario/formulario.component';
+import { CadastroService } from './services/cadastro/cadastro.service';
+import { MatIconModule } from '@angular/material/icon'
+import { Buscacadastro } from './models/busca/buscacadastro';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,12 +52,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    DadosComponent, 
-    HomeComponent, 
-    AlertaComponent, 
-    AvisosalvarComponent, 
-    AvisocamposComponent
+    AppComponent,
+    DadosComponent,
+    HomeComponent,
+    AlertaComponent,
+    AvisosalvarComponent,
+    AvisocamposComponent, FormularioComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgbModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -77,23 +84,25 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-        Usuario, 
-        Cadastro, 
-        Aviso, 
-        LoginService, 
-        SucessoService,
-        AvisocamposService,
-        AvisosalvarService,
-        Avisosalvarmodel,
-        Avisocamposmodel,
-        LogadoService
-      ],
+    Usuario,
+    Cadastro,
+    Aviso,
+    LoginService,
+    SucessoService,
+    AvisocamposService,
+    AvisosalvarService,
+    Avisosalvarmodel,
+    Avisocamposmodel,
+    LogadoService,
+    CadastroService,
+    Buscacadastro
+  ],
   bootstrap: [AppComponent],
   exports: [
-        AlertaComponent, 
-        AvisocamposComponent,
-        AvisosalvarComponent
-      ],
+    AlertaComponent,
+    AvisocamposComponent,
+    AvisosalvarComponent
+  ],
   entryComponents: [
     AlertaComponent,
     AvisocamposComponent,
@@ -101,4 +110,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ]
 
 })
-export class AppModule {}
+export class AppModule { }
