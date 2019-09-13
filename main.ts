@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -20,6 +20,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true
     },
+    icon: __dirname + '/src/favicon.ico'
   });
 
   if (serve) {
@@ -51,6 +52,7 @@ function createWindow() {
 
 try {
 
+
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
@@ -77,3 +79,7 @@ try {
   // Catch Error
   // throw e;
 }
+
+ipcMain.on('online-status-changed', (event, status) => {
+  console.log(status);
+});

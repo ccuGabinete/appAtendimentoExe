@@ -1,5 +1,5 @@
 import { CadastroService } from './../services/cadastro/cadastro.service';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Setores } from '../models/setores/setores';
 import { Documentos } from '../models/documentos/documentos';
 import { Cadastro } from '../models/cadastro/cadastro';
@@ -13,6 +13,7 @@ import { AvisocamposService } from '../services/avisocampos/avisocampos.service'
 import * as moment from 'moment-timezone';
 import { Buscacadastro } from '../models/busca/buscacadastro';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario/usuario';
 
 
 @Component({
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
 export class DadosComponent implements OnInit, OnDestroy {
   nome: string;
   usuario: string;
+  link: string;
 
   constructor(
     private router: Router,
@@ -39,8 +41,7 @@ export class DadosComponent implements OnInit, OnDestroy {
 
   setores = new Setores().getTipos();
   documentos = new Documentos().getDocs();
-  
-  @ViewChild('submitButton') submitButton;
+  @ViewChild('submitButton', { static: true }) submitButton;
   ngOnInit() {
     this.cadastro = new Cadastro();
     this.documento = new Buscacadastro(); // classe que representa apenas um atributo para resgatar o número do documento entre views
@@ -49,13 +50,26 @@ export class DadosComponent implements OnInit, OnDestroy {
     this.cadastro.matricula = '';
     this.cadastro.data = this.gerarData();
     this.logado.currentMessage.subscribe(user => {
-      this.cadastro.matricula = user.login;
+      this.cadastro.matricula = user.nome;
       this.usuario = user.nome;
+      (user.link) ? this.link = user.link.replace('open', 'uc') : this.link = '';
+
     });
   }
 
-  changeEvent($event){
+  changeEvent($event) {
     this.submitButton.focus();
+  }
+
+  onLogout() {
+    const userLogout = new Usuario();
+    userLogout.nome = '';
+    userLogout.link = '';
+    userLogout.senha = '';
+    userLogout.isValid = false;
+    userLogout.login = '';
+    this.logado.mudarUsuario(userLogout);
+    this.router.navigateByUrl('');
   }
 
 
@@ -69,18 +83,24 @@ export class DadosComponent implements OnInit, OnDestroy {
       this.serviceCampos.mudarAviso(false);
       this.openSnackBarCampos();
     } else {
+      this.serviceSalvar.mudarAviso(true);
       this.cadastro.atendido = this.nome.toUpperCase();
       this.cadastro.numero = this.cadastro.numero.split('/').join('').split('.').join('').split('-').join('');
       this.salvarservice.salvarCadastro(this.cadastro).subscribe(data => {
-        if (data.atendido) {
-          this.serviceSalvar.mudarAviso(true);
-          this.openSnackBarSalvar();
-          this.cadastroservice.getCadastro(this.cadastro);
-          this.reset();
-        } else {
+        this.serviceSalvar.mudarAviso(true);
+        this.serviceSalvar.currentMessage.subscribe(msg => {
+          console.log(msg);
+        });
+
+        this.openSnackBarSalvar();
+        this.cadastroservice.getCadastro(this.cadastro);
+        this.reset();
+
+      },
+        error => {
+          this.serviceSalvar.mudarAviso(false);
           this.openSnackBarSalvar();
         }
-      }
       );
     }
   }
@@ -121,25 +141,31 @@ export class DadosComponent implements OnInit, OnDestroy {
 
     this.salvarservice.buscarCadastro(this.documento.numero)
       .subscribe(data => {
+        console.log(data);
         const cadastro = new Cadastro();
-        cadastro.atendido = data[0].atendido;
-        cadastro.data = data[0].data;
-        cadastro.destino = data[0].destino;
-        cadastro.documento = data[0].documento;
+        cadastro.atendido = data.body[0].atendido;
+        cadastro.data = data.body[0].data;
+        cadastro.destino = data.body[0].destino;
+        cadastro.documento = data.body[0].documento;
         cadastro.matricula = this.usuario;
-        cadastro.numero = data[0].numero;
+        cadastro.numero = data.body[0].numero;
         this.cadastroservice.getCadastro(cadastro);
+        console.log(this.cadastro);
+        this.router.navigateByUrl('formulario');
 
-        this.cadastroservice.currentMessage.subscribe(data => {
-          if (data.numero) {
-            this.router.navigateByUrl('formulario');
-          }
+      },
+
+        error => {
+          this.serviceSalvar.mudarAviso(false);
+          this.openSnackBarSalvar();
         });
-      });
+
   }
 
-  ngOnDestroy(): void {
 
+
+  ngOnDestroy(): void {
+    this.serviceSalvar.mudarAviso(false);
   }
 
 }

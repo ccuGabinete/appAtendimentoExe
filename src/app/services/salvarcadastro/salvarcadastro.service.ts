@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Cadastro } from '../../models/cadastro/cadastro';
-import { Observable, of } from 'rxjs';
+import { HttpHeaders, HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Cadastro } from '../../interfaces/cadastro';
+import { Observable, of, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 const apiUrl = 'https://ccuapi.herokuapp.com/';
@@ -20,25 +20,33 @@ export class SalvarcadastroService {
 
   constructor(private http: HttpClient) { }
 
-  salvarCadastro (cadastro: Cadastro): Observable<Cadastro> {
-    return this.http.post<any>(apiUrl, cadastro, httpOptions)
-    .pipe(
-      tap(itens => console.log('saved data')),
-      catchError(this.handleError('', []))
-    );
+  salvarCadastro(cadastro: Cadastro): Observable<HttpResponse<Cadastro>> {
+    return this.http.post<Cadastro>(apiUrl, cadastro, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  buscarCadastro (numero: string): Observable<Cadastro> {
-    return this.http.post<any>(local, {numero: numero}, httpOptions)
-    .pipe(
-      tap(itens => console.log('loaded data')),
-      catchError(this.handleError('', []))
-    );
+  buscarCadastro(numero: string): Observable<HttpResponse<Cadastro>> {
+    return this.http.post<Cadastro>(local, { numero: numero }, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-    private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      return of(result as T);
-    };
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 }

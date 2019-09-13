@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FormularioComponent implements OnInit {
 cadastro: Cadastro = new Cadastro();
-logo = require('../../assets/logo.png');
+logo = require('../../../prefeitura/logo.png');
   constructor(private cadastroservice: CadastroService,  private router: Router) {}
 
   ngOnInit() {

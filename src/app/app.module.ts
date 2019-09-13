@@ -1,4 +1,3 @@
-
 import 'reflect-metadata';
 import '../polyfills';
 
@@ -23,7 +22,6 @@ import { DadosComponent } from './dados/dados.component';
 import { Cadastro } from './models/cadastro/cadastro';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginService } from './services/acesso/login.service';
-import { Usuario } from './models/usuario/usuario';
 import { HomeComponent } from './home/home.component';
 
 import { AppComponent } from './app.component';
@@ -41,9 +39,10 @@ import { AvisocamposComponent } from './avisocampos/avisocampos.component';
 import { LogadoService } from './services/logado/logado.service';
 import { FormularioComponent } from './formulario/formulario.component';
 import { CadastroService } from './services/cadastro/cadastro.service';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
 import { Buscacadastro } from './models/busca/buscacadastro';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Usuario } from './models/usuario/usuario';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -84,7 +83,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-    Usuario,
     Cadastro,
     Aviso,
     LoginService,
@@ -95,7 +93,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     Avisocamposmodel,
     LogadoService,
     CadastroService,
-    Buscacadastro
+    Buscacadastro,
+    Usuario
   ],
   bootstrap: [AppComponent],
   exports: [

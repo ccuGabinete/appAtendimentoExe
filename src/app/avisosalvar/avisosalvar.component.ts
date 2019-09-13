@@ -7,14 +7,14 @@ import { AvisosalvarService } from '../services/avisosalvar/avisosalvar.service'
   styleUrls: ['./avisosalvar.component.scss']
 })
 export class AvisosalvarComponent implements OnInit {
-  loadingSalvar: boolean = false;
+  loadingSalvar = false;
 
-  constructor(private avisosalvar: AvisosalvarService,) { }
+  constructor(private avisosalvar: AvisosalvarService) { }
 
   ngOnInit() {
     this.avisosalvar.currentMessage.subscribe(x =>  {
       this.loadingSalvar = x;
-    })
+    });
   }
 
 }

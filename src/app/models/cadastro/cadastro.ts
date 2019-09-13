@@ -5,5 +5,4 @@ export class Cadastro {
     numero: string;
     matricula: string;
     data: Date;
-  lenght: any;
 }
