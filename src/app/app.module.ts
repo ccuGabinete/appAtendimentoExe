@@ -43,6 +43,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Buscacadastro } from './models/busca/buscacadastro';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Usuario } from './models/usuario/usuario';
+import { Setor } from './models/setor';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -83,6 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
+    Setor,
     Cadastro,
     Aviso,
     LoginService,
